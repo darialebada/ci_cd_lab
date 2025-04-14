@@ -41,7 +41,7 @@ jobs:
 
 
   compile:
-    needs: test
+    needs: [test]
     # Specify the Os for the runner (container)
     runs-on: ubuntu-latest  # Use the latest Ubuntu runner
 
