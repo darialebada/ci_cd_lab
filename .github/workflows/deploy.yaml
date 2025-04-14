@@ -39,6 +39,7 @@ jobs:
       - name: Run tests
         run: go test ./...
 
+
   compile:
     needs: test
     # Specify the Os for the runner (container)
