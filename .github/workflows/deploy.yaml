@@ -6,22 +6,6 @@ on:
       - main
 
 jobs:
-  compile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
-
-      - name: Install dependencies
-        run: go mod download
-
-      - name: Compile binary
-        run: go build -o myapp
   test:
     runs-on: ubuntu-latest
     steps:
@@ -40,25 +24,19 @@ jobs:
         run: go test ./...
 
   compile:
-    needs: [test]
-    # Specify the Os for the runner (container)
-    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
-
+    needs: test
+    runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository code into the runner
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Set up Go environment with version 1.22
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: '1.22'
 
-      # Step 3: Download Go module dependencies
       - name: Install dependencies
         run: go mod download
 
-      # Step 4: Compile the Go application into a binary named 'myapp'
       - name: Compile binary
         run: go build -o myapp
